@@ -1,103 +1,225 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React, { useState } from 'react';
+import { NativeButton } from '../../components/ui/NativeButton';
+import { ThemedText } from '../../components/ui/ThemeText';
+import ThemedTextInput from '../../components/ui/ThemedTextInput';
+import { useAuthStore } from '@/store/useAuthStore';
+import { TailSpin } from 'react-loader-spinner';
+import { useRouter } from 'next/navigation';
+
+
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PASSWORD_REGEX = /(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
+
+export default function LoginPage() {
+
+  const { login } = useAuthStore();
+
+  const [isPosting, setIsPosting] = useState(false);
+  const [form, setForm] = useState({ email: '',idClient:'', password: '' });
+  const [errors, setErrors] = useState({ email: '',idClient:'', password: '' });
+  const [showAlert, setShowAlert] = useState(false);
+  const [loadingRedirect, setLoadingRedirect] = useState(false); 
+
+  const router = useRouter();
+
+
+  const validateForm = () => {
+    let valid = true;
+    const newErrors = { email: '', idClient:'', password: '' };
+
+    if (!form.email) {
+      newErrors.email = 'El correo es obligatorio';
+      valid = false;
+    } else if (!EMAIL_REGEX.test(form.email)) {
+      newErrors.email = 'Correo electrónico no válido';
+      valid = false;
+    }
+    if (!form.idClient) {
+      newErrors.idClient = 'El key_client es obligatorio';
+      valid = false;
+    } 
+
+    if (!form.password) {
+      newErrors.password = 'La contraseña es obligatoria';
+      valid = false;
+    } else if (!PASSWORD_REGEX.test(form.password)) {
+      newErrors.password = 'El password debe tener una mayúscula, una minúscula y un número';
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
+
+
+  const onLogin = async () => {
+    if (!validateForm()) return;
+
+    setIsPosting(true);
+
+    const wasSuccessful = await login(form.email, form.password, form.idClient, '');
+
+    setIsPosting(false);
+
+     if (!wasSuccessful) {
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 5000); // Esconde la alerta después de 4 segundos
+     } else {
+      setLoadingRedirect(true);
+      setTimeout(() => {
+     router.replace('/visor') 
+    }, 1000); // 3 segundos delay antes de redirigir
+  }
+};
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>  {!loadingRedirect && (
+      <div
+        style={{
+          height: '100vh',
+          backgroundColor: '#1e357a', // tono más oscuro de indigo
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 20,
+        }}
+      >
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+             {showAlert && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 20,
+            width: '90%',
+            maxWidth: 400,
+            backgroundColor: '#f8d7da',
+            color: '#721c24',
+            padding: 20,
+            borderRadius: 8,
+            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+          }}
+        >
+          <strong>¡Error!</strong> Usuario o contraseña incorrectos.
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      )}
+        <div
+          style={{
+            maxWidth: 400,
+            width: '100%',
+            textAlign: 'center',
+            backgroundColor: 'indigo',
+            borderRadius: 15,
+            padding: 20,
+            boxSizing: 'border-box',
+          }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          {/* Logo centrado */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 0 }}>
+            <img
+              src="/logo.png" // coloca tu logo en /public/logo.png
+              alt="Logo"
+              style={{ width: 150, height: 150, objectFit: 'contain' }}
+            />
+          </div>
+
+          <div>
+            <ThemedText type="titleBlack">OrdenaYa App</ThemedText>
+          </div>
+          <div style={{ paddingTop: '1vh' }}>
+            <ThemedText style={{ color: '#ccc' }}>Por favor ingrese para continuar</ThemedText>
+          </div>
+    
+          <div style={{ marginTop: 20, textAlign: 'left' }}>
+            <ThemedTextInput
+              placeholder="Correo electrónico"
+              type="email"
+              autoComplete="email"
+              value={form.email}
+              colorFont="white"
+              onChange={(e) => {
+                setForm({ ...form, email: e.target.value });
+                setErrors({ ...errors, email: '' });
+              }}
+              style={errors.email ? { borderColor: '#e53935', borderWidth: 2 } : {}}
+            />
+            {errors.email && (
+              <ThemedText style={{ color: '#e53935', marginBottom: 6, marginLeft: 4, fontSize: 13 }}>
+                {errors.email}
+              </ThemedText>
+            )}
+
+            <ThemedTextInput
+              placeholder="Contraseña"
+              type="password"
+              autoComplete="current-password"
+              value={form.password}
+              onChange={(e) => {
+                setForm({ ...form, password: e.target.value });
+                setErrors({ ...errors, password: '' });
+              }}
+              colorFont="white"
+              style={errors.password ? { borderColor: '#e53935', borderWidth: 2 } : {}}
+            />
+            {errors.password && (
+              <ThemedText style={{ color: '#e53935', marginBottom: 6, marginLeft: 4, fontSize: 13 }}>
+                {errors.password}
+              </ThemedText>
+            )}
+
+             <ThemedTextInput
+              placeholder="key_client"
+              type="text"
+              autoComplete="text"
+              value={form.idClient}
+              colorFont="white"
+              onChange={(e) => {
+                setForm({ ...form, idClient: e.target.value });
+                setErrors({ ...errors, idClient: '' });
+              }}
+              style={errors.idClient ? { borderColor: '#e53935', borderWidth: 2 } : {}}
+            />
+            {errors.idClient && (
+              <ThemedText style={{ color: '#e53935', marginBottom: 6, marginLeft: 4, fontSize: 13 }}>
+                {errors.idClient}
+              </ThemedText>
+            )}
+
+          </div>
+
+          <div style={{ marginTop: 20 }}>
+            <NativeButton
+              disabled={isPosting}
+              loading={isPosting}
+              loadingText="Ingresando..."
+              onClick={onLogin}
+              backgroundColor="green"
+              textColor="#ffffff"
+            >
+              Ingresar
+            </NativeButton>
+          </div>
+        </div>
+      </div>)}
+      {loadingRedirect && (
+  <div style={{
+    position: 'fixed',
+    top: 0, left: 0, right: 0, bottom: 0,
+    backgroundColor: '#1e357a',
+    display: 'flex', justifyContent: 'center', alignItems: 'center',
+    color: 'white',
+    fontSize: 24,
+  }}>
+    <TailSpin
+      height="80"
+      width="80"
+      color="white"
+      ariaLabel="loading"
+    />
+  </div>
+)}
+    </>
   );
 }
