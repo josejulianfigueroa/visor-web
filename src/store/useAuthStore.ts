@@ -1,7 +1,7 @@
-import { User } from '@/interfaces/user-client.interface';
+import { authLogin } from '@/actions/auth/auth-actions';
+import { User } from '../interfaces/user-client.interface';
 import { create } from 'zustand';
 import { persist } from "zustand/middleware";
-
 
 export type AuthStatus = 'authenticated' | 'unauthenticated' | 'checking';
 
@@ -41,19 +41,8 @@ export const useAuthStore = create<AuthState>()(
   },
 
   login: async (email: string, password: string, idClient: string, expoPushToken: string) => {
-  const res = await fetch('/api/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password, idClient, expoPushToken }),
-  });
-
-   if (!res.ok) {
-     return get().changeStatus(undefined, undefined);
-  } else {
-
-  const data = await res.json();
-return get().changeStatus(data.token, data.user);
-  }
+ const resp = await authLogin(email, password, idClient, expoPushToken);
+    return get().changeStatus(resp?.token, resp?.user);
   },
 
   logout: async () => {

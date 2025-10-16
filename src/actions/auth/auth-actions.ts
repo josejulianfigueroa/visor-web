@@ -1,11 +1,8 @@
-import { NextResponse } from 'next/server';
+'use server';
 
 import { User } from "@/interfaces/user-client.interface";
 
-export async function POST(request: Request) {
-  const body = await request.json();
-  
-  interface Client {
+export interface Client {
     id:            string;
     fullName:      string;
     rut:           string;
@@ -24,7 +21,7 @@ export async function POST(request: Request) {
     habilitarPdv: boolean;
     tokenMercadoPago: string;
 }
-interface AuthResponse {
+export interface AuthResponse {
   id: string;
   email: string;
   rut: string;
@@ -64,20 +61,28 @@ const returnUserToken = (
 };
 
 
-  // Ejemplo: llamar a backend real, o validar aquí directamente
-  const data = await fetch(`${ process.env.NEXT_PUBLIC_BACKEND_URL }/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-       next: {
+export const authLogin = async (email: string, password: string, idClient: string, expoPushToken: string) => {
+  email = email.toLowerCase();
+
+  try {
+    const method = 'POST';
+    const dataSend = { "email": email, "password": password, "idClient": idClient, "expoPushToken": expoPushToken };
+
+    const  data  =  await fetch(`${ process.env.NEXT_PUBLIC_BACKEND_URL }/auth/login`,{
+        method,
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify( dataSend ),
+      // cache: 'force-cache',
+      next: {
         revalidate: 60 * 60 * 30 * 6
       }
     }).then( resp => resp.json() );
 
-  if (data) {
+    return returnUserToken(data);
 
-    return NextResponse.json(returnUserToken(data));
-  } else {
-    return NextResponse.error();
+  } catch (error) {
+    return null;
   }
-}
+};

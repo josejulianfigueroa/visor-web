@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import io, { Socket } from 'socket.io-client';
 import { motion } from 'framer-motion';
-import { useAuthStore } from '@/store/useAuthStore';
+import { useAuthStore } from '../../store/useAuthStore';
 import { TailSpin } from 'react-loader-spinner';
 import { useRouter } from 'next/navigation';
 

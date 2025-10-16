@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { NativeButton } from '../../components/ui/NativeButton';
 import { ThemedText } from '../../components/ui/ThemeText';
 import ThemedTextInput from '../../components/ui/ThemedTextInput';
-import { useAuthStore } from '@/store/useAuthStore';
+import { useAuthStore } from '../store/useAuthStore';
 import { TailSpin } from 'react-loader-spinner';
 import { useRouter } from 'next/navigation';
 
