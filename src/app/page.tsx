@@ -60,8 +60,8 @@ export default function LoginPage() {
 
     setIsPosting(true);
 
-    const wasSuccessful = await login(form.email, form.password, form.idClient, '');
-
+   const wasSuccessful = await login(form.email, form.password, form.idClient, '');
+console.log('wasSuccessful', wasSuccessful);
     setIsPosting(false);
 
      if (!wasSuccessful) {
