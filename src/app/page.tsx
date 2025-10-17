@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NativeButton } from '../../components/ui/NativeButton';
 import { ThemedText } from '../../components/ui/ThemeText';
 import ThemedTextInput from '../../components/ui/ThemedTextInput';
@@ -9,13 +9,12 @@ import { TailSpin } from 'react-loader-spinner';
 import { useRouter } from 'next/navigation';
 
 
-
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PASSWORD_REGEX = /(?:(?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
 
 export default function LoginPage() {
 
-  const { login } = useAuthStore();
+  const { login, status } = useAuthStore();
 
   const [isPosting, setIsPosting] = useState(false);
   const [form, setForm] = useState({ email: '',idClient:'', password: '' });
@@ -25,6 +24,12 @@ export default function LoginPage() {
 
   const router = useRouter();
 
+
+ useEffect(() => {
+  if (status === 'authenticated') {
+    router.replace('/visor');
+  }
+}, [status, router]);
 
   const validateForm = () => {
     let valid = true;
@@ -61,7 +66,7 @@ export default function LoginPage() {
     setIsPosting(true);
 
    const wasSuccessful = await login(form.email, form.password, form.idClient, '');
-console.log('wasSuccessful', wasSuccessful);
+
     setIsPosting(false);
 
      if (!wasSuccessful) {
@@ -70,6 +75,7 @@ console.log('wasSuccessful', wasSuccessful);
      } else {
       setLoadingRedirect(true);
       setTimeout(() => {
+              setLoadingRedirect(false);
      router.replace('/visor') 
     }, 1000); // 3 segundos delay antes de redirigir
   }
@@ -138,7 +144,6 @@ console.log('wasSuccessful', wasSuccessful);
               type="email"
               autoComplete="email"
               value={form.email}
-              colorFont="white"
               onChange={(e) => {
                 setForm({ ...form, email: e.target.value });
                 setErrors({ ...errors, email: '' });
@@ -160,7 +165,6 @@ console.log('wasSuccessful', wasSuccessful);
                 setForm({ ...form, password: e.target.value });
                 setErrors({ ...errors, password: '' });
               }}
-              colorFont="white"
               style={errors.password ? { borderColor: '#e53935', borderWidth: 2 } : {}}
             />
             {errors.password && (
@@ -174,7 +178,6 @@ console.log('wasSuccessful', wasSuccessful);
               type="text"
               autoComplete="text"
               value={form.idClient}
-              colorFont="white"
               onChange={(e) => {
                 setForm({ ...form, idClient: e.target.value });
                 setErrors({ ...errors, idClient: '' });

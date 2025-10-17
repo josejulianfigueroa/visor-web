@@ -118,8 +118,9 @@ if (status === 'lista') {
     flexDirection: 'column',    // layout vertical
     gap: 10, 
     backgroundColor: '#312e81', 
-    height: '100vh', 
+    height: '95vh', 
     padding: 20, 
+    paddingTop: 5,
     color: 'white' 
   }}>
      <button
@@ -157,7 +158,7 @@ if (status === 'lista') {
        }
 
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <span style={{ fontSize: 24, fontWeight: 'bold' }}>
+        <span style={{ fontSize: 22, fontWeight: 'bold' }}>
           {user ? user.client.fullName: ''}
         </span>
         <span style={{ fontSize: 16, fontWeight: 'bold'  }}>
@@ -170,7 +171,7 @@ if (status === 'lista') {
     </div>
 
     {/* Row con las tres columnas */}
-    <div style={{ display: 'flex', gap: 20, flex: 1 }}>
+    <div style={{ display: 'flex', gap: 20, flex: 1, paddingTop: 5, }}>
         <Column title="Nueva" orders={nuevaOrders} highlightId={highlightNueva} />
         <Column title="Preparación" orders={preparacionOrders} highlightId={highlightPreparacion} />
         <Column title="Lista" orders={listaOrders} highlightId={highlightLista} />
@@ -212,7 +213,7 @@ if (status === 'lista') {
       <div
         style={{
           flex: 1,
-           maxHeight: 650, 
+           maxHeight: 550, 
           overflowY: 'auto',
           paddingRight: 6, // para dejar espacio scrollbar visual
           marginTop: 10,
@@ -224,25 +225,33 @@ if (status === 'lista') {
           orders.map((id) => {
             const isHighlight = id === highlightId;
 
-            return (
-              <motion.div
-                key={id}
-                animate={isHighlight ? { backgroundColor: ['#f59e0b', '#4338ca', '#f59e0b'] } : undefined}
-                transition={isHighlight ? { repeat: 6, duration: 1.2 } : undefined}
-                style={{
-                  backgroundColor: isHighlight ? '#f59e0b' : '#4338ca',
-                  margin: 6,
-                  padding: 15,
-                  textAlign: 'center',
-                  color: 'white',
-                  fontSize: 38,
-                  fontWeight: 'bold',
-                  borderRadius: 6,
-                }}
-              >
-                #{id}
-              </motion.div>
-            );
+         return (
+  <motion.div
+    key={id}
+    style={{
+      margin: 6,
+      padding: 0,
+      textAlign: 'center',
+      fontSize: 35,
+      fontWeight: 'bold',
+      borderRadius: 6,
+    }}
+  >
+    <motion.span
+      animate={isHighlight ? { backgroundColor: ['#f59e0b', '#4338ca', '#f59e0b'] } : undefined}
+      transition={isHighlight ? { repeat: 10, duration: 6 } : undefined}
+      style={{
+        backgroundColor: isHighlight ? '#f59e0b' : '#4338ca',
+        color: 'white',
+        borderRadius: 4,
+        padding: '4px 8px', // un poco de espacio para que se vea bien
+      }}
+    >
+      #{id}
+    </motion.span>
+  </motion.div>
+);
+
           })
         )}
       </div>

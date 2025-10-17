@@ -20,7 +20,7 @@ export const useAuthStore = create<AuthState>()(
   (set, get) => ({
     
   // Properties
-  status: 'checking',
+  status: 'unauthenticated',
   token: undefined,
   user: undefined,
 
@@ -41,8 +41,10 @@ export const useAuthStore = create<AuthState>()(
   },
 
   login: async (email: string, password: string, idClient: string, expoPushToken: string) => {
- const resp = await authLogin(email, password, idClient, expoPushToken);
-    return get().changeStatus(resp?.token, resp?.user);
+ 
+     const resp = await authLogin(email, password, idClient, expoPushToken);
+    
+      return get().changeStatus(resp?.token, resp?.user);
   },
 
   logout: async () => {

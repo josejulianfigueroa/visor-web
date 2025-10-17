@@ -2,30 +2,30 @@ import React, { useRef, useState, CSSProperties } from 'react';
 
 interface ThemedTextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: string; // nombre del icono, si usaras iconos de alguna librería JS
-  colorFont?: string;
   style?: CSSProperties;
 }
 
 export default function ThemedTextInput({
   icon,
-  colorFont,
   style,
   ...rest
 }: ThemedTextInputProps) {
   const [isActive, setIsActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const borderColor = isActive ? (colorFont || 'white') : '#ccc';
+  const borderColor = isActive ? '#1e357a' : '#ccc'; // color del borde al enfocar
 
   return (
     <div
       style={{
         borderWidth: 1,
         borderColor,
+        borderStyle: 'solid',
         borderRadius: 5,
         padding: 10,
         marginBottom: 10,
         display: 'flex',
         alignItems: 'center',
+        backgroundColor: 'white', // fondo estático blanco
         ...style,
       }}
       onMouseDown={() => inputRef.current?.focus()}
@@ -48,8 +48,8 @@ export default function ThemedTextInput({
           border: 'none',
           outline: 'none',
           flex: 1,
-          color: 'white',
-          
+          backgroundColor: 'white', // fondo blanco estático
+          color: 'black', // texto negro estático
           fontSize: 16,
           fontWeight: 'bold',
         }}
