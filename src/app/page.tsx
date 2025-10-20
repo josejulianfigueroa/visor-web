@@ -174,7 +174,7 @@ export default function LoginPage() {
             )}
 
              <ThemedTextInput
-              placeholder="key_client"
+              placeholder="key_client_4_digits"
               type="text"
               autoComplete="text"
               value={form.idClient}

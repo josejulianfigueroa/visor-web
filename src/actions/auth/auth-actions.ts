@@ -66,9 +66,9 @@ export const authLogin = async (email: string, password: string, idClient: strin
 
   try {
     const method = 'POST';
-    const dataSend = { "email": email, "password": password, "idClient": idClient, "expoPushToken": expoPushToken };
+    const dataSend = { "email": email, "password": password, "idClient": idClient};
 
-    const  data  =  await fetch(`${ process.env.NEXT_PUBLIC_BACKEND_URL }/auth/login`,{
+    const  data  =  await fetch(`${ process.env.NEXT_PUBLIC_BACKEND_URL }/auth/loginweb`,{
         method,
             headers: {
                 'Content-type': 'application/json'
