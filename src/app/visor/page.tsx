@@ -121,6 +121,7 @@ if (status === 'lista') {
     height: '95vh', 
     padding: 20, 
     paddingTop: 5,
+    paddingBottom: 0,  
     color: 'white' 
   }}>
      <button
@@ -141,7 +142,14 @@ if (status === 'lista') {
         >
           ←
         </button>
-    <div style={{ display: 'flex',margin: '0 auto',  paddingRight: 20,  alignItems: 'center', minWidth:400 , justifyContent: 'center', gap: 5, backgroundColor: 'indigo' }}>
+    <div style={{ display: 'flex',
+    margin: '0 auto',  
+    paddingRight: 20,  
+    alignItems: 'center', 
+      minWidth:400 , 
+      justifyContent: 'center', 
+      gap: 0, 
+      backgroundColor: 'indigo' }}>
        {user?.client.image === '' ? (
         <img
         src={'/logo.png'}
@@ -162,10 +170,7 @@ if (status === 'lista') {
           {user ? user.client.fullName: ''}
         </span>
         <span style={{ fontSize: 16, fontWeight: 'bold'  }}>
-          {user ? user.client.phone: ''}
-        </span>
-        <span style={{ fontSize: 16, fontWeight: 'bold'  }}>
-          {user ? user.client.address: ''}
+          {user ? user.client.phone + '. ' : ''} {user ? user.client.address : ''}
         </span>
       </div>
     </div>
