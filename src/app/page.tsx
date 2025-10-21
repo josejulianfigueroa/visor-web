@@ -67,7 +67,7 @@ export default function LandingPage() {
 <section
   id="descripcion"
   style={{
-    background: '#789CCF', //indigoDark,
+    background: '#1e357a', //indigoDark,
     padding: '40px 10vw 40px 10vw',
   }}
 >
@@ -97,6 +97,7 @@ export default function LandingPage() {
   <ul style={{
     fontSize: 18,
     lineHeight: '2.1',
+     fontWeight: 'bold',
     color: '#e0e0e0',
     paddingLeft: 0,
     maxWidth: 700,
