@@ -8,13 +8,6 @@ import 'swiper/css/pagination';
 import { useState } from 'react';
 
 
-
-
-// No need to register modules globally with Swiper v8+
-
-
-
-
 const indigoDark = '#2E0854';
 const blueDeep = '#001F3F';
 const black = '#181A1B';
@@ -29,12 +22,22 @@ const plans = [
 
 
 
-
 const images = [
- '/IMG_0237.PNG',
+ '/IMG_0235.PNG',
+ '/IMG_0251.PNG',
+ '/IMG_0235.PNG',
+ '/IMG_0239.PNG',
+ '/IMG_0240.PNG',
  '/IMG_0241.PNG',
- '/IMG_0238.PNG',
- '/IMG_0233.PNG'
+ '/IMG_0242.PNG',
+ '/IMG_0244.PNG',  
+ '/IMG_0246.PNG',
+ '/IMG_0247.PNG',
+ '/IMG_0248.jpg',
+ '/IMG_0249.PNG',
+ '/IMG_0250.PNG',
+ '/img1.png',
+
 ];
 
 
@@ -201,6 +204,48 @@ export default function LandingPage() {
    padding: '40px 10vw 40px 10vw',
  }}
 >
+      {/* Swiper horizontal */}
+    <div style={{
+ background: `linear-gradient(90deg, ${blue}, ${blueDeep})`,  
+ borderRadius: 24,
+ padding: 20,
+ maxWidth: 1200,
+ margin: '20px auto',
+ boxShadow: '0 12px 28px rgba(46, 8, 84, 0.6)',
+}}>
+ <Swiper
+   navigation={true}
+   pagination={{ clickable: true }}
+   spaceBetween={24}
+   slidesPerView={1}
+   breakpoints={{
+     640: { slidesPerView: 1 },
+     768: { slidesPerView: 2 },
+     1024: { slidesPerView: 3 },
+   }}
+   style={{ maxWidth: '100%', paddingBottom: 20, paddingTop: 20 }}
+ >
+   {images.map((src, index) => (
+     <SwiperSlide key={index}>
+       <img
+         src={src}
+         alt={`Ejemplo ${index + 1}`}
+         style={{
+           width: '100%',
+           borderRadius: 16,
+           border: '3px solid #3F0071',
+           boxShadow: '0 2px 12px #181A1B77',
+           height: 480,
+           cursor: 'pointer',
+         }}
+         onClick={() => setModalImg(src)} // Asegúrate de manejar setModalImg en el contexto
+       />
+     </SwiperSlide>
+   ))}
+ </Swiper>
+</div>
+
+
 <div className="info-card">
  <h2 className="info-title">
    ¿ Por qué OrdenesYa App ?
@@ -208,11 +253,16 @@ export default function LandingPage() {
 
 
  <ul className="info-list">
-   <li>Carrito de ítems intuitivo y veloz.</li>
-   <li>Organización dinámica por estado de orden.</li>
-   <li>Control y visibilidad de pedidos en tiempo real.</li>
-   <li>Optimización del trabajo en equipo y comunicación interna.</li>
-   <li>Flujo de trabajo visual, ágil y confiable.</li>
+   <li>Carrito de ítems intuitivo y veloz</li>
+   <li>Control y visibilidad de pedidos en tiempo real</li>
+   <li>Optimización del trabajo en equipo y comunicación interna</li>
+   <li>Visor de estado de órdenes - Flujo de trabajo visual, ágil y confiable</li>
+   <li>Integración con Mercadopago - Pago con QR en modo punto de venta</li>
+   <li>Monitoreo del flujo de órdenes a Distancia con reportes y gráficos</li>
+   <li>Control de stock y precios</li>
+   <li>Notificaciones Push en tiempo real</li>
+   <li>Carga rápida de productos y categorías por archivo excel</li>
+   <li>Soporte 24/7</li>
  </ul>
 
 
@@ -250,7 +300,7 @@ export default function LandingPage() {
      padding-left: 0;
      list-style-type: disc;
      max-width: 700px;
-     flex-basis: 50%;
+     flex-basis: 55%;
      margin: 0;
    }
 
@@ -276,53 +326,6 @@ export default function LandingPage() {
      }
    }
  `}</style>
-</div>
-
-
-
-
-
-
-    {/* Swiper horizontal */}
-    <div style={{
- background: `linear-gradient(90deg, ${blue}, ${blueDeep})`,  
- borderRadius: 24,
- padding: 20,
- maxWidth: 1200,
- margin: '20px auto',
- boxShadow: '0 12px 28px rgba(46, 8, 84, 0.6)',
-}}>
- <Swiper
-   navigation={true}
-   pagination={{ clickable: true }}
-   spaceBetween={24}
-   slidesPerView={1}
-   breakpoints={{
-     640: { slidesPerView: 1 },
-     768: { slidesPerView: 2 },
-     1024: { slidesPerView: 3 },
-   }}
-   style={{ maxWidth: '100%', paddingBottom: 20, paddingTop: 20 }}
- >
-   {images.map((src, index) => (
-     <SwiperSlide key={index}>
-       <img
-         src={src}
-         alt={`Ejemplo ${index + 1}`}
-         style={{
-           width: '100%',
-           borderRadius: 16,
-           border: '3px solid #3F0071',
-           boxShadow: '0 2px 12px #181A1B77',
-           objectFit: 'cover',
-           height: 380,
-           cursor: 'pointer',
-         }}
-         onClick={() => setModalImg(src)} // Asegúrate de manejar setModalImg en el contexto
-       />
-     </SwiperSlide>
-   ))}
- </Swiper>
 </div>
 
 
@@ -441,11 +444,12 @@ export default function LandingPage() {
      Lleva la gestión eficiente de órdenes siempre contigo. ¡Descarga la aplicación móvil para instalar el sistema directamente desde tu dispositivo Android!
    </p>
    <a
-     href="/OrdenesYaApp.apk"  // archivo .apk dentro de /public
+     href="https://drive.google.com/file/d/1ChtZJdy0P5C123SPFZSdJADeLasgz0E6/view?usp=sharing"  // archivo .apk dentro de /public
      download
+     target="_blank"
      style={{
        display: 'inline-block',
-       backgroundColor: '#cc5500', // naranja quemado
+       backgroundColor: '#cc5500', 
        color: 'white',
        padding: '14px 32px',
        borderRadius: 12,
