@@ -234,7 +234,7 @@ export default function LandingPage() {
            borderRadius: 16,
            border: '3px solid #3F0071',
            boxShadow: '0 2px 12px #181A1B77',
-           height: 480,
+           height: 430,
            cursor: 'pointer',
          }}
          onClick={() => setModalImg(src)} // Asegúrate de manejar setModalImg en el contexto
@@ -261,7 +261,7 @@ export default function LandingPage() {
    <li>Control de stock y precios</li>
    <li>Notificaciones Push en tiempo real</li>
    <li>Carga rápida de productos y categorías por archivo excel</li>
-   <li>Soporte 24/7</li>
+   <li>No más papel, tickets o recibos - Soporte 24/7</li>
  </ul>
 
 
@@ -405,66 +405,82 @@ export default function LandingPage() {
 
     {/* Descarga */}
 <section
- id="descarga"
- style={{
-   background: `linear-gradient(90deg, ${blueDeep}, ${indigoDark})`,
-   color: 'white',
-   padding: '38px 10vw',
-   borderRadius: 20,
-   maxWidth: 1200,
-   margin: '40px auto',
-   display: 'flex',
-   alignItems: 'center',
-   justifyContent: 'space-around',
-   gap: 30,
-   boxShadow: '0 12px 28px rgba(30,0,70,0.6)',
- }}
+  id="descarga"
+  style={{
+    background: `linear-gradient(90deg, ${blueDeep}, ${indigoDark})`,
+    color: 'white',
+    padding: '38px 10vw',
+    borderRadius: 20,
+    maxWidth: 1200,
+    margin: '40px auto',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    gap: 30,
+    boxShadow: '0 12px 28px rgba(30,0,70,0.6)',
+  }}
 >
- {/* Imagen tipo "descarga la App aquí" */}
- <img
-   src="/download-app.png"
-   alt="Descarga la App aquí"
-   style={{
-     width: 180,
-     height: 180,
-     borderRadius: 20,
-     boxShadow: '0 0 24px #3F0071AA',
-     objectFit: 'contain',
-   }}
- />
+  {/* Imagen tipo "descarga la App aquí" */}
+  <img
+    src="/download-app.png"
+    alt="Descarga la App aquí"
+    style={{
+      width: 180,
+      height: 180,
+      borderRadius: 20,
+      boxShadow: '0 0 24px #3F0071AA',
+      objectFit: 'contain',
+    }}
+    className="descarga-img"
+  />
 
+  {/* Texto y botón de descarga */}
+  <div style={{ maxWidth: 600 }} className="descarga-texto">
+    <h2 style={{ fontSize: 32, fontWeight: 700, marginBottom: 16 }}>
+      Descarga la App OrdenesYa
+    </h2>
+    <p style={{ fontSize: 18, lineHeight: 1.5, marginBottom: 24 }}>
+      Lleva la gestión eficiente de órdenes siempre contigo. ¡Descarga la aplicación móvil para instalar el sistema directamente desde tu dispositivo Android!
+    </p>
+    <a
+      href="https://drive.google.com/file/d/1ChtZJdy0P5C123SPFZSdJADeLasgz0E6/view?usp=sharing"
+      download
+      target="_blank"
+      style={{
+        display: 'inline-block',
+        backgroundColor: '#cc5500',
+        color: 'white',
+        padding: '14px 32px',
+        borderRadius: 12,
+        fontWeight: 700,
+        fontSize: 20,
+        boxShadow: '0 4px 16px #992f00',
+        textDecoration: 'none',
+        transition: 'background-color 0.3s',
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#a03e00')}
+      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#cc5500')}
+    >
+      Descargar APK
+    </a>
+  </div>
 
- {/* Texto y botón de descarga */}
- <div style={{ maxWidth: 600 }}>
-   <h2 style={{ fontSize: 32, fontWeight: 700, marginBottom: 16 }}>
-     Descarga la App OrdenesYa
-   </h2>
-   <p style={{ fontSize: 18, lineHeight: 1.5, marginBottom: 24 }}>
-     Lleva la gestión eficiente de órdenes siempre contigo. ¡Descarga la aplicación móvil para instalar el sistema directamente desde tu dispositivo Android!
-   </p>
-   <a
-     href="https://drive.google.com/file/d/1ChtZJdy0P5C123SPFZSdJADeLasgz0E6/view?usp=sharing"  // archivo .apk dentro de /public
-     download
-     target="_blank"
-     style={{
-       display: 'inline-block',
-       backgroundColor: '#cc5500', 
-       color: 'white',
-       padding: '14px 32px',
-       borderRadius: 12,
-       fontWeight: 700,
-       fontSize: 20,
-       boxShadow: '0 4px 16px #992f00',
-       textDecoration: 'none',
-       transition: 'background-color 0.3s',
-     }}
-     onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#a03e00')}
-     onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#cc5500')}
-   >
-     Descargar APK
-   </a>
- </div>
+  <style jsx>{`
+    @media (max-width: 768px) {
+      #descarga {
+        flex-direction: column;
+        text-align: center;
+      }
+      .descarga-img {
+        margin-bottom: 24px;
+      }
+      .descarga-texto {
+        max-width: 100% !important;
+      }
+    }
+  `}</style>
 </section>
+
 
 
      {/* Contacto */}
