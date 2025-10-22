@@ -23,8 +23,7 @@ const plans = [
 
 
 const images = [
- '/IMG_0235.PNG',
- '/IMG_0251.PNG',
+ '/IMG_0233.PNG',
  '/IMG_0235.PNG',
  '/IMG_0239.PNG',
  '/IMG_0240.PNG',
