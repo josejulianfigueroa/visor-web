@@ -64,7 +64,7 @@ export default function LandingPage() {
      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
        <img
          src={'/logo.png'}
-         alt="Logo OrdenesYa"
+         alt="Logo OrdenaYa"
          width={56}
          height={56}
          style={{ borderRadius: 12, boxShadow: '0 0 10px #0003' }}
@@ -77,7 +77,7 @@ export default function LandingPage() {
            color: 'white',
          }}
        >
-         OrdenesYa App
+         OrdenaYa App
        </span>
      </div>
 
@@ -187,7 +187,7 @@ export default function LandingPage() {
      <section style={{ textAlign: 'center', padding: '60px 30px 32px 30px', background: `linear-gradient(90deg, ${indigoDark}, ${blueDeep})`, boxShadow: '0 4px 40px #0005' }}>
    
        <h1 style={{ fontSize: 35, fontWeight: 800, marginBottom: 24, background: 'linear-gradient(90deg,#3F0071,#2E0854,#001F3F)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'white' }}>
-         Revoluciona tu restaurante con OrdenesYa App
+         Revoluciona tu restaurante con OrdenaYa App
        </h1>
        <p style={{ fontSize: 20, maxWidth: 650, margin: '0 auto', color: '#f6f6f6', fontWeight: 400 }}>
          App pensada para la realización y gestión eficiente de órdenes internas de un local de comida. Un carrito intuitivo, alternancia dinámica de estados clave (<b>Nueva</b>, <b>Preparación</b>, <b>Lista</b>, <b>Entregada</b>, <b>Cancelada</b>), visibilidad total y control en tiempo real. Diseño fluido para equipos modernos que buscan precisión, velocidad y confiabilidad.
@@ -247,7 +247,7 @@ export default function LandingPage() {
 
 <div className="info-card">
  <h2 className="info-title">
-   ¿ Por qué OrdenesYa App ?
+   ¿ Por qué OrdenaYa App ?
  </h2>
 
 
@@ -257,7 +257,7 @@ export default function LandingPage() {
    <li>Optimización del trabajo en equipo y comunicación interna</li>
    <li>Visor de estado de órdenes - Flujo de trabajo visual, ágil y confiable</li>
    <li>Integración con Mercadopago - Pago con QR en modo punto de venta</li>
-   <li>Monitoreo del flujo de órdenes a Distancia con reportes y gráficos</li>
+   <li>Monitoreo del flujo de órdenes a distancia con reportes y gráficos</li>
    <li>Control de stock y precios</li>
    <li>Notificaciones Push en tiempo real</li>
    <li>Carga rápida de productos y categorías por archivo excel</li>
@@ -438,7 +438,7 @@ export default function LandingPage() {
   {/* Texto y botón de descarga */}
   <div style={{ maxWidth: 600 }} className="descarga-texto">
     <h2 style={{ fontSize: 32, fontWeight: 700, marginBottom: 16 }}>
-      Descarga la App OrdenesYa
+      Descarga la App OrdenaYa
     </h2>
     <p style={{ fontSize: 18, lineHeight: 1.5, marginBottom: 24 }}>
       Lleva la gestión eficiente de órdenes siempre contigo. ¡Descarga la aplicación móvil para instalar el sistema directamente desde tu dispositivo Android!
@@ -528,7 +528,7 @@ export default function LandingPage() {
        color: '#e0e0e0',
        boxShadow: '0 -2px 8px #001F3F77'
      }}>
-       © {new Date().getFullYear()} OrdenesYa App. Todos los derechos reservados.
+       © {new Date().getFullYear()} OrdenaYa App. Todos los derechos reservados.
      </footer>
    </main>
  );
