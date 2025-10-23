@@ -444,7 +444,7 @@ export default function LandingPage() {
       Lleva la gestión eficiente de órdenes siempre contigo. ¡Descarga la aplicación móvil para instalar el sistema directamente desde tu dispositivo Android!
     </p>
     <a
-      href="https://drive.google.com/file/d/1ChtZJdy0P5C123SPFZSdJADeLasgz0E6/view?usp=sharing"
+      href="https://expo.dev/artifacts/eas/sz3cLNcCY85jtV77y65snA.apk"
       download
       target="_blank"
       style={{
