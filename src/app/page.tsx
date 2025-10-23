@@ -288,6 +288,7 @@ export default function LandingPage() {
      flex-basis: 45%;
      text-align: center;
      margin: 0;
+     padding-right: 30;
    }
 
 
