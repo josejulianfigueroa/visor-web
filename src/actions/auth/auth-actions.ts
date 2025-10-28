@@ -1,6 +1,7 @@
 'use server';
 
 import { User } from "@/interfaces/user-client.interface";
+import { Plan } from "../interfaces/interfaces";
 
 export interface Client {
     id:            string;
@@ -19,6 +20,7 @@ export interface Client {
     createdAt:     Date;
     habilitarMercadoPago: boolean;
     habilitarPdv: boolean;
+    habilitarRegistroUsers: boolean;
     tokenMercadoPago: string;
 }
 export interface AuthResponse {
@@ -81,6 +83,29 @@ export const authLogin = async (email: string, password: string, idClient: strin
     }).then( resp => resp.json() );
 
     return returnUserToken(data);
+
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getPlanes = async () => {
+
+  try {
+    const method = 'GET';
+
+    const  data =  await fetch(`${ process.env.NEXT_PUBLIC_BACKEND_URL }/clients/planes`,{
+        method,
+            headers: {
+                'Content-type': 'application/json'
+            },
+      // cache: 'force-cache',
+      /*next: {
+        revalidate: 60 * 60 * 30 * 6
+      }*/
+    }).then( resp => resp.json() );
+
+    return data;
 
   } catch (error) {
     return null;

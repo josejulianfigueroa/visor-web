@@ -5,7 +5,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getPlanes } from '@/actions/auth/auth-actions';
+import { Plan } from '@/actions/interfaces/interfaces';
 
 
 const indigoDark = '#2E0854';
@@ -13,12 +15,12 @@ const blueDeep = '#001F3F';
 const black = '#181A1B';
 const blue = '#001631';
 
-
+/*
 const plans = [
  { duration: '3 meses', price: '$29.990', description: 'Ideal para iniciar tu transformación digital.' },
  { duration: '6 meses', price: '$48.990', description: 'Optimización continua y ahorro en tu operación.' },
  { duration: '12 meses', price: '$89.990', description: 'Solución completa y soporte premium para todo el año.' }
-];
+];*/
 
 
 
@@ -45,6 +47,18 @@ export default function LandingPage() {
 
  const [modalImg, setModalImg] = useState<string | null>(null);
  const [isOpen, setIsOpen] = useState(false); 
+
+const [planes, setPlanes] = useState<Plan[]>([]);
+
+  useEffect(() => {
+    const fetchPlanes = async () => {
+      const data = await getPlanes();
+      setPlanes(data);
+    };
+    fetchPlanes();
+  }, []);
+
+
   return (
    <main style={{ background: `linear-gradient(180deg, ${indigoDark} 0%, ${blueDeep} 100%)`, color: 'white', minHeight: '100vh', fontFamily: 'Inter, Arial, sans-serif' }}>
      {/* Navbar */}
@@ -368,7 +382,8 @@ export default function LandingPage() {
      }}>
        <h2 style={{ fontWeight: 700, fontSize: 32, marginBottom: 30 }}>Planes de Suscripción</h2>
        <div style={{ display: 'flex', gap: 38, flexWrap: 'wrap', justifyContent: 'center' }}>
-         {plans.map((plan, idx) => (
+
+         {planes && planes.map((plan, idx) => (
            <div key={idx} style={{
              background: `linear-gradient(180deg, #3F0071 0%, ${indigoDark} 100%)`,
              boxShadow: '0 4px 22px #0002',
@@ -380,13 +395,22 @@ export default function LandingPage() {
              textAlign: 'center',
              border: '2px solid #232344'
            }}>
-             <h3 style={{ fontWeight: 700, fontSize: 24, marginBottom: 16 }}>{plan.duration}</h3>
+             <h3 style={{ fontWeight: 700, fontSize: 24, marginBottom: 16 }}>{plan.duracion}</h3>
              <div style={{
                fontWeight: 800, fontSize: 32, marginBottom: 18,
                background: 'linear-gradient(90deg,#fff,#ffd700,#3F0071)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
-             }}>{plan.price}</div>
-             <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.description}</div>
-             <button style={{
+             }}>{plan.price} USD</div>
+             <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.title}</div>
+              <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.historial} meses de almacenamiento</div>
+              <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.soporte.toString().length > 42 ? '2 mes gratis' : '1 mes gratis'}</div>
+              <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.usuariosPermitidos} usuarios</div>
+              <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.soporte.toString().length > 42 ? plan.soporte.toString().slice(0,11) : plan.soporte.toString()}</div>
+              <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.soporte.toString().length > 24 ? plan.soporte.toString().slice(12,24).replace(/\./g, '') : 'x'}</div>
+                <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.soporte.toString().length > 26 ? plan.soporte.toString().slice(25,41).replace(/\./g, ''): 'x'}</div>
+              <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.soporte.toString().length > 42 ? plan.soporte.toString().slice(42,61).replace(/\./g, ''): 'x'}</div>
+             <button 
+             onClick={() => window.location.href = '#contacto'}
+             style={{
                background: '#1f0954',
                color: '#fff',
                borderRadius: 8,
@@ -436,7 +460,7 @@ export default function LandingPage() {
   />
 
   {/* Texto y botón de descarga */}
-  <div style={{ maxWidth: 600 }} className="descarga-texto">
+  <div style={{ maxWidth: 650 }} className="descarga-texto">
     <h2 style={{ fontSize: 32, fontWeight: 700, marginBottom: 16 }}>
       Descarga la App OrdenaYa
     </h2>
@@ -444,7 +468,7 @@ export default function LandingPage() {
       Lleva la gestión eficiente de órdenes siempre contigo. ¡Descarga la aplicación móvil para instalar el sistema directamente desde tu dispositivo Android!
     </p>
     <a
-      href="https://expo.dev/artifacts/eas/woY88UDHf5V47cs3cMRgUZ.apk"
+      href="https://expo.dev/artifacts/eas/q82dZJsxtm7qr8CiDBDjrJ.apk"
       download
       style={{
         display: 'inline-block',
@@ -462,6 +486,29 @@ export default function LandingPage() {
       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#cc5500')}
     >
       Descargar APK
+    </a>
+     <a
+      href="/manualUsuarioAppOrdenaYa.pdf"
+      download
+      style={{
+        display: 'inline-block',
+        backgroundColor: '#001F3F',
+        color: 'white',
+        padding: '14px 32px',
+        borderRadius: 12,
+        fontWeight: 700,
+        fontSize: 20,
+        marginLeft: 40,
+        marginTop: 40,
+        paddingLeft: 20,
+        boxShadow: '0 4px 16px indigo',
+        textDecoration: 'none',
+        transition: 'background-color 0.3s',
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#001F3F')}
+      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1e357a')}
+    >
+      Descargar Manual de Usuario
     </a>
   </div>
 
@@ -493,7 +540,7 @@ export default function LandingPage() {
      }}>
        <h2 style={{ fontSize: 30, fontWeight: 700, marginBottom: 18 }}>¿Tienes dudas o quieres saber más?</h2>
        <p style={{ fontSize: 18, color: '#f2f2ff', marginBottom: 46 }}>
-         Escríbenos y transforma la gestión de tu local hoy.<br/>
+         Escríbenos y transforma la gestión de tu local hoy<br/>
          <b>Email:</b> appordenaya@gmail.com<br/>
          <b>WhatsApp:</b> +56 9 8710 4600
        </p>
