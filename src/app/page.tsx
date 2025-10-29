@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 import { useEffect, useState } from 'react';
 import { getPlanes } from '@/actions/auth/auth-actions';
 import { Plan } from '@/actions/interfaces/interfaces';
-
+import { ClipLoader } from 'react-spinners';
 
 const indigoDark = '#2E0854';
 const blueDeep = '#001F3F';
@@ -47,7 +47,6 @@ export default function LandingPage() {
 
  const [modalImg, setModalImg] = useState<string | null>(null);
  const [isOpen, setIsOpen] = useState(false); 
-
 const [planes, setPlanes] = useState<Plan[]>([]);
 
   useEffect(() => {
@@ -383,7 +382,14 @@ const [planes, setPlanes] = useState<Plan[]>([]);
        <h2 style={{ fontWeight: 700, fontSize: 32, color:'#bfa300', marginBottom: 30 }}>Planes de Suscripción</h2>
        <div style={{ display: 'flex', gap: 38, flexWrap: 'wrap', justifyContent: 'center' }}>
 
-      {planes && planes.map((plan, idx) => (
+      {(!planes || planes.length === 0) ? (
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      <ClipLoader size={50} color="#bfa300" />
+    </div>
+
+      ) : (
+  
+          planes && planes.map((plan, idx) => (
   <div key={idx} style={{
     background: `linear-gradient(180deg, #3F0071 0%, ${indigoDark} 100%)`,
              boxShadow: '0 4px 22px #0002',
@@ -411,6 +417,7 @@ const [planes, setPlanes] = useState<Plan[]>([]);
     <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price !== 0 ? 'Adiestramiento Administrador' : 'x'}</div>
     <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price === 179 ? 'Capacitación del Personal': 'x'}</div>
     <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price === 0 || plan.price === 99 ? 'x' : 'Carga del Menú'}</div>
+    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price === 0 || plan.price === 99 ? 'x' : 'Creación de Usuarios'}</div>
     <button
       onClick={() => window.location.href = '#contacto'}
       style={{
@@ -427,7 +434,9 @@ const [planes, setPlanes] = useState<Plan[]>([]);
       }}
     >Suscribirme</button>
   </div>
-))}
+))
+      )
+}
 
        </div>
      </section>
@@ -603,7 +612,7 @@ const [planes, setPlanes] = useState<Plan[]>([]);
        color: '#e0e0e0',
        boxShadow: '0 -2px 8px #001F3F77'
      }}>
-       © {new Date().getFullYear()} OrdenaYa App. Todos los derechos reservados.
+       © 2025 OrdenaYa App. Todos los derechos reservados.
      </footer>
    </main>
  );
