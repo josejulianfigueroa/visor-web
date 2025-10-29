@@ -81,7 +81,7 @@ const [planes, setPlanes] = useState<Plan[]>([]);
          alt="Logo OrdenaYa"
          width={56}
          height={56}
-         style={{ borderRadius: 12, boxShadow: '0 0 10px #0003' }}
+         style={{ borderRadius: 12, boxShadow: '0 0 10px #0003', backgroundColor: 'indigo'}}
        />
        <span
          style={{
@@ -200,7 +200,7 @@ const [planes, setPlanes] = useState<Plan[]>([]);
      {/* Hero */}
      <section style={{ textAlign: 'center', padding: '60px 30px 32px 30px', background: `linear-gradient(90deg, ${indigoDark}, ${blueDeep})`, boxShadow: '0 4px 40px #0005' }}>
    
-       <h1 style={{ fontSize: 35, fontWeight: 800, marginBottom: 24, background: 'linear-gradient(90deg,#3F0071,#2E0854,#001F3F)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'white' }}>
+       <h1 style={{ fontSize: 35, fontWeight: 800, marginBottom: 24, background: 'linear-gradient(90deg,#3F0071,#2E0854,#001F3F)', WebkitBackgroundClip: 'text', WebkitTextFillColor: '#bfa300' }}>
          Revoluciona tu restaurante con OrdenaYa App
        </h1>
        <p style={{ fontSize: 20, maxWidth: 650, margin: '0 auto', color: '#f6f6f6', fontWeight: 400 }}>
@@ -298,7 +298,7 @@ const [planes, setPlanes] = useState<Plan[]>([]);
    .info-title {
      font-weight: 700;
      font-size: 32px;
-     color: #e0e0e0;
+     color: #bfa300;
      flex-basis: 45%;
      text-align: center;
      margin: 0;
@@ -380,50 +380,55 @@ const [planes, setPlanes] = useState<Plan[]>([]);
        boxShadow: '0 2px 24px #0006',
        marginBottom: 48,
      }}>
-       <h2 style={{ fontWeight: 700, fontSize: 32, marginBottom: 30 }}>Planes de Suscripción</h2>
+       <h2 style={{ fontWeight: 700, fontSize: 32, color:'#bfa300', marginBottom: 30 }}>Planes de Suscripción</h2>
        <div style={{ display: 'flex', gap: 38, flexWrap: 'wrap', justifyContent: 'center' }}>
 
-         {planes && planes.map((plan, idx) => (
-           <div key={idx} style={{
-             background: `linear-gradient(180deg, #3F0071 0%, ${indigoDark} 100%)`,
+      {planes && planes.map((plan, idx) => (
+  <div key={idx} style={{
+    background: `linear-gradient(180deg, #3F0071 0%, ${indigoDark} 100%)`,
              boxShadow: '0 4px 22px #0002',
              borderRadius: 18,
              padding: '32px 36px',
-             minWidth: 240,
-             maxWidth: 320,
+             minWidth: 400,
+             maxWidth: 480,
              marginBottom: 20,
              textAlign: 'center',
-             border: '2px solid #232344'
-           }}>
-             <h3 style={{ fontWeight: 700, fontSize: 24, marginBottom: 16 }}>{plan.duracion}</h3>
-             <div style={{
+    border: '2px solid #ffcc00' 
+  }}>
+    {/* Precio destacado con texto en gradiente dorado */}
+     <div style={{
                fontWeight: 800, fontSize: 32, marginBottom: 18,
                background: 'linear-gradient(90deg,#fff,#ffd700,#3F0071)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
              }}>{plan.price} USD</div>
-             <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.title}</div>
-              <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.historial} meses de almacenamiento</div>
-              <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.soporte.toString().length > 42 ? '2 mes gratis' : '1 mes gratis'}</div>
-              <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.usuariosPermitidos} usuarios</div>
-              <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.soporte.toString().length > 42 ? plan.soporte.toString().slice(0,11) : plan.soporte.toString()}</div>
-              <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.soporte.toString().length > 24 ? plan.soporte.toString().slice(12,24).replace(/\./g, '') : 'x'}</div>
-                <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.soporte.toString().length > 26 ? plan.soporte.toString().slice(25,41).replace(/\./g, ''): 'x'}</div>
-              <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.soporte.toString().length > 42 ? plan.soporte.toString().slice(42,61).replace(/\./g, ''): 'x'}</div>
-             <button 
-             onClick={() => window.location.href = '#contacto'}
-             style={{
-               background: '#1f0954',
-               color: '#fff',
-               borderRadius: 8,
-               fontWeight: 700,
-               fontSize: 18,
-               padding: '9px 28px',
-               border: 'none',
-               marginTop: 8,
-               cursor: 'pointer',
-               boxShadow: '0 2px 8px #0002'
-             }}>Suscribirme</button>
-           </div>
-         ))}
+
+    <h3 style={{ fontWeight: 700, fontSize: 24, marginBottom: 16 }}>{plan.duracion}</h3>
+    {/* resto de campos */}
+    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.title}</div>
+    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.historial} meses de Almacenamiento</div>
+    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price === 0 ? 'x' : '1 mes gratis'}</div>
+    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.usuariosPermitidos} usuarios</div>
+    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>Soporte: {plan.soporte.toString()}</div>
+    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price !== 0 ? 'Adiestramiento Administrador' : 'x'}</div>
+    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price === 179 ? 'Capacitación del Personal': 'x'}</div>
+    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price === 0 || plan.price === 99 ? 'x' : 'Carga del Menú'}</div>
+    <button
+      onClick={() => window.location.href = '#contacto'}
+      style={{
+        background: '#1f0954',
+        color: '#fff',
+        borderRadius: 8,
+        fontWeight: 700,
+        fontSize: 18,
+        padding: '9px 28px',
+        marginTop: 20,
+        cursor: 'pointer',
+        border: '2px solid #ffcc00' ,
+        boxShadow: ' 0 0 12px #b8860b'
+      }}
+    >Suscribirme</button>
+  </div>
+))}
+
        </div>
      </section>
 
@@ -434,7 +439,7 @@ const [planes, setPlanes] = useState<Plan[]>([]);
   style={{
     background: `linear-gradient(90deg, ${blueDeep}, ${indigoDark})`,
     color: 'white',
-    padding: '38px 10vw',
+    padding: '38px 5vw',
     borderRadius: 20,
     maxWidth: 1200,
     margin: '40px auto',
@@ -460,8 +465,8 @@ const [planes, setPlanes] = useState<Plan[]>([]);
   />
 
   {/* Texto y botón de descarga */}
-  <div style={{ maxWidth: 650 }} className="descarga-texto">
-    <h2 style={{ fontSize: 32, fontWeight: 700, marginBottom: 16 }}>
+  <div style={{ maxWidth: 850 }} className="descarga-texto">
+    <h2 style={{ fontSize: 32, fontWeight: 700,color:'#bfa300', marginBottom: 16 }}>
       Descarga la App OrdenaYa
     </h2>
     <p style={{ fontSize: 18, lineHeight: 1.5, marginBottom: 24 }}>
@@ -478,38 +483,62 @@ const [planes, setPlanes] = useState<Plan[]>([]);
         borderRadius: 12,
         fontWeight: 700,
         fontSize: 20,
-        boxShadow: '0 4px 16px #992f00',
+        boxShadow: '0 4px 16px indigo',
         textDecoration: 'none',
         transition: 'background-color 0.3s',
       }}
       onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#a03e00')}
       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#cc5500')}
     >
-      Descargar APK
+      Descargar App
     </a>
      <a
       href="/manualUsuarioAppOrdenaYa.pdf"
       download
       style={{
         display: 'inline-block',
-        backgroundColor: '#001F3F',
+        backgroundColor: '#1e357a',
         color: 'white',
         padding: '14px 32px',
         borderRadius: 12,
         fontWeight: 700,
         fontSize: 20,
-        marginLeft: 40,
+        marginLeft: 20,
         marginTop: 40,
         paddingLeft: 20,
         boxShadow: '0 4px 16px indigo',
         textDecoration: 'none',
         transition: 'background-color 0.3s',
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#001F3F')}
-      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1e357a')}
+      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#16264d')}
+      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor ='#1e357a' )}
     >
-      Descargar Manual de Usuario
+      Manual de Usuario
     </a>
+    <a
+  href="/terminos_y_condiciones_app_ordenaya.pdf"
+  download
+  style={{
+    display: 'inline-block',
+    backgroundColor: '#00796b', // verde oscuro
+    color: '#white',           // verde claro para texto
+    padding: '14px 32px',
+    borderRadius: 12,
+    fontWeight: 700,
+    fontSize: 20,
+    marginLeft: 20,
+    marginTop: 40,
+    paddingLeft: 20,
+    boxShadow: '0 4px 16px indigo', // sombra verde muy oscura
+    textDecoration: 'none',
+    transition: 'background-color 0.3s',
+  }}
+  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#004d40')}  // verde medio al hover
+  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#00796b')}   // vuelve a verde oscuro
+>
+  Términos y Condiciones
+</a>
+
   </div>
 
   <style jsx>{`
@@ -538,7 +567,7 @@ const [planes, setPlanes] = useState<Plan[]>([]);
        color: '#e0e8ff',
        textAlign: 'center'
      }}>
-       <h2 style={{ fontSize: 30, fontWeight: 700, marginBottom: 18 }}>¿Tienes dudas o quieres saber más?</h2>
+       <h2 style={{ fontSize: 30, fontWeight: 700, marginBottom: 18, color:'#bfa300',}}>¿Tienes dudas o quieres saber más?</h2>
        <p style={{ fontSize: 18, color: '#f2f2ff', marginBottom: 46 }}>
          Escríbenos y transforma la gestión de tu local hoy<br/>
          <b>Email:</b> appordenaya@gmail.com<br/>
