@@ -514,7 +514,7 @@ const [planes, setPlanes] = useState<Plan[]>([]);
         fontSize: 20,
         marginLeft: 20,
         marginTop: 40,
-        paddingLeft: 20,
+        paddingLeft: 30,
         boxShadow: '0 4px 16px indigo',
         textDecoration: 'none',
         transition: 'background-color 0.3s',
@@ -537,7 +537,7 @@ const [planes, setPlanes] = useState<Plan[]>([]);
     fontSize: 20,
     marginLeft: 20,
     marginTop: 40,
-    paddingLeft: 20,
+    paddingLeft: 30,
     boxShadow: '0 4px 16px indigo', // sombra verde muy oscura
     textDecoration: 'none',
     transition: 'background-color 0.3s',
