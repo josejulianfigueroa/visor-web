@@ -407,7 +407,7 @@ const [planes, setPlanes] = useState<Plan[]>([]);
                background: 'linear-gradient(90deg,#fff,#ffd700,#3F0071)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
              }}>{plan.price} USD</div>
 
-    <h3 style={{ fontWeight: 700, fontSize: 24, marginBottom: 16 }}>{plan.duracion}</h3>
+    <h3 style={{ fontWeight: 700, fontSize: 24, marginBottom: 16 }}>{plan.duracion === '1' ? plan.duracion + ' mes' : plan.duracion + ' meses'}</h3>
     {/* resto de campos */}
     <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.title}</div>
     <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.historial} meses de Almacenamiento</div>
