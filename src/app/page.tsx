@@ -413,11 +413,11 @@ const [planes, setPlanes] = useState<Plan[]>([]);
     <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.historial} meses de Almacenamiento</div>
     <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.usuariosPermitidos} usuarios</div>
     <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>Soporte: {plan.soporte.toString()}</div>
-    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price === 0 ? 'x' : '1 mes gratis'}</div>
     <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price !== 0 ? 'Adiestramiento Administrador' : 'x'}</div>
-    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price === 179 ? 'Capacitación del Personal': 'x'}</div>
-    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price === 0 || plan.price === 99 ? 'x' : 'Carga del Menú'}</div>
-    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.price === 0 || plan.price === 99 ? 'x' : 'Creación de Usuarios'}</div>
+    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.duracion === '3' || plan.duracion === '6' || plan.duracion === '12' ? 'Creación de Usuarios' : 'x'}</div>
+    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.duracion === '6' || plan.duracion === '12' ? 'Carga del Menú' : 'x'}</div>
+    <div style={{ fontSize: 17, color: '#cfcff3', marginBottom: 14 }}>{plan.duracion === '12' ? 'Capacitación del Personal': 'x'}</div>
+
     <button
       onClick={() => window.location.href = '#contacto'}
       style={{
