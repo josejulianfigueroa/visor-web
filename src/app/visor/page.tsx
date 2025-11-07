@@ -22,6 +22,28 @@ export default function Visor() {
   const router = useRouter();
   const { user, token, logout, status } = useAuthStore();
 
+
+
+
+
+         // SONIDO NOTIFICACION INICIO
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    audioRef.current = new Audio('/notificacion.mp3'); // Pon el archivo en public/
+  }, []);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.play().catch(console.error);
+    }
+  }, [nuevaOrders, preparacionOrders, listaOrders]);
+      // SONIDO NOTIFICACION FIN
+
+
+
+
+
   useEffect(() => {
     if (status !== 'authenticated' && status !== 'checking') {
       router.replace('/login');
