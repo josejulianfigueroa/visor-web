@@ -65,7 +65,10 @@ export default function Visor() {
     socketRef.current.on('disconnect', () => { console.log('desconectado'); setConnected(false); });
 
     socketRef.current.on('orders-updated', (data) => {
-      const { orderId, status, mesaNombre } = data;
+      const { clientId, orderId, status, mesaNombre } = data;
+
+       if (clientId !== user?.client.id) return;
+
       const dataAdd = recortarMesaNombre(mesaNombre).length > 0 ? '-' + recortarMesaNombre(mesaNombre) : '';
       const orderCompose = orderId.slice(0, 2) + dataAdd;
 

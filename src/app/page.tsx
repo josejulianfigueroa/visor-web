@@ -482,7 +482,7 @@ const [planes, setPlanes] = useState<Plan[]>([]);
       Lleva la gestión eficiente de órdenes siempre contigo. ¡Descarga la aplicación móvil para instalar el sistema directamente desde tu dispositivo Android!
     </p>
     <a
-      href="https://expo.dev/artifacts/eas/jCdLkUkCFTj7DTL3uq8y4Y.apk"
+      href="https://expo.dev/artifacts/eas/4RBSV5jBnsfMDvigtvwcs8.apk"
       download
       style={{
         display: 'inline-block',
